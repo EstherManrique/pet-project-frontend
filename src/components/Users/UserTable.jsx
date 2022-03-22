@@ -59,7 +59,7 @@ function UserTable() {
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Created</th>
+            {/* <th>Created</th> */}
             <th>Role</th>
             <th>Store</th>
           </tr>
@@ -71,7 +71,7 @@ function UserTable() {
                 <td>{user.name}</td>
                 <td>{user.userName}</td>
                 <td>{user.email}</td>
-                <td>{user.createdAt}</td>
+                {/* <td>{user.createdAt}</td> */}
                 <td>{user.roleId.name}</td>
                 <td>
                   {user.hasOwnProperty("storeId") ? user.storeId.name : "-"}

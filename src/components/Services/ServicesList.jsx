@@ -24,7 +24,7 @@ const ServicesList = () => {
           {services.map((service) => {
             return (
               <Col sm key={service._id}>
-                <Card className="text-center" border="primary">
+                <Card className="text-center mb-3" border="primary">
                   <Card.Body>
                     <Card.Title>{service.name}</Card.Title>
                     <Card.Text>{service.description}</Card.Text>

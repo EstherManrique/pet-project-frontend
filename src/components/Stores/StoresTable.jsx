@@ -53,7 +53,7 @@ const StoresTable = () => {
             <th>Address</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Location</th>
+            {/* <th>Location</th> */}
             <th>Operations</th>
           </tr>
         </thead>
@@ -65,7 +65,7 @@ const StoresTable = () => {
                 <td>{store.address}</td>
                 <td>{store.email}</td>
                 <td>{store.phone}</td>
-                <td>{store.location}</td>
+                {/* <td>{store.location}</td> */}
                 <td>
                   <Button
                     variant="success"
