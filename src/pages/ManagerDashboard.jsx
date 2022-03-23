@@ -32,8 +32,8 @@ const ManagerDashboard = () => {
 
   // console.log(user);
   return (
-    <div className="mt-5" style={{
-      minHeight: '90vh'
+    <div className="mt-5"  style={{
+      minHeight: '40rem'
     }}>
       <Container>
         <h2 className="mb-4">Manage Reservations</h2>

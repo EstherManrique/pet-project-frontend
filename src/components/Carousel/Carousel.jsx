@@ -4,7 +4,6 @@ import { Carousel as BCarousel } from "react-bootstrap";
 const Carousel = () => {
   return (
 <BCarousel className='mb-5' style={{
-
   overflow: 'hidden'
 }}>
   <BCarousel.Item style={{

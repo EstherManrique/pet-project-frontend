@@ -69,7 +69,9 @@ function Register() {
   }
 
   return (
-    <Fragment>
+    <div style={{
+      minHeight: '40rem'
+    }}>
       <Container>
         <section className="heading">
           <h2>
@@ -142,7 +144,7 @@ function Register() {
           </form>
         </section>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 

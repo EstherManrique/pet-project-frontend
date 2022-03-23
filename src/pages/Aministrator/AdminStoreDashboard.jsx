@@ -24,7 +24,9 @@ const AdminStoresDashboard = ({ ...props }) => {
   }, [isAdmin, navigate]);
 
   return (
-    <div>
+    <div style={{
+      minHeight: '40rem'
+    }}>
       <Container>
       <h2>Administrator Stores</h2>
         {

@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 const ServiceForm = ({ ...props }) => {
 
@@ -126,11 +127,12 @@ const ServiceForm = ({ ...props }) => {
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
+            <div className="form-group d-flex justify-content-between">
+              <Button href="/admin/services" variant="light">Back</Button>
+              <Button type="submit" variant='primary'>
+                Submit
+              </Button>
+            </div>
         </form>
       </section>
     </Fragment>

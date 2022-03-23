@@ -59,7 +59,9 @@ function Login() {
   }
 
   return (
-    <Fragment>
+    <div style={{
+      minHeight: '40rem'
+    }}>
       <Container>
         <section className='heading'>
           <h2>
@@ -111,7 +113,7 @@ function Login() {
           </form>
         </section>
       </Container>
-    </Fragment>
+    </div>
   )
 }
 

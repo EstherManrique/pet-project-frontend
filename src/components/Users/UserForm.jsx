@@ -2,18 +2,15 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import {createUser, getUsers, deleteUser } from "../../features/users/userSlice";
+import { Button } from "react-bootstrap";
+
 
 const UserForm = ({ ...props }) => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const { id } = props;
 
   const { user } = useSelector((state) => state.auth);
-
-  // const state = useSelector((state) => state.users);
-  // const users = [];
 
   const formDefault = {
     name: "",
@@ -28,9 +25,9 @@ const UserForm = ({ ...props }) => {
 
   const [rolesList, setRolesList] = useState([]);
 
-  const [storesList, setStoresList] = useState([])
+  const [storesList, setStoresList] = useState([]);
 
-  const { name, userName, email, password, roleId, storeId} = formData;
+  const { name, userName, email, password, roleId, storeId } = formData;
 
   const saveUser = async (data) => {
     const url = id
@@ -79,13 +76,13 @@ const UserForm = ({ ...props }) => {
           userName,
           email,
           roleId: roleId._id,
-          storeId: storeId ? storeId._id : ''
+          storeId: storeId ? storeId._id : "",
         });
       });
   };
 
   const getRoles = async () => {
-    await fetch('http://localhost:5000/api/roles', {
+    await fetch("http://localhost:5000/api/roles", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -93,31 +90,31 @@ const UserForm = ({ ...props }) => {
         Authorization: "Bearer " + user.token,
       },
     })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    })
-    .then((json) => {
-      setRolesList(json.roles);
-    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        setRolesList(json.roles);
+      });
   };
 
   const getStores = async () => {
-    await fetch('http://localhost:5000/api/stores')
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    })
-    .then((json) => {
-      setStoresList(json.stores);
-    })
-  }
+    await fetch("http://localhost:5000/api/stores")
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        setStoresList(json.stores);
+      });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -127,7 +124,7 @@ const UserForm = ({ ...props }) => {
       email,
       password,
       roleId,
-      storeId
+      storeId,
     };
     saveUser(userData);
   };
@@ -142,10 +139,10 @@ const UserForm = ({ ...props }) => {
   useEffect(() => {
     getRoles();
     getStores();
-    if(id) {
+    if (id) {
       getUser(id);
     }
-  });
+  }, []);
 
   return (
     <Fragment>
@@ -201,34 +198,51 @@ const UserForm = ({ ...props }) => {
           </div>
           <div className="form-group">
             <label htmlFor="">Roles</label>
-            <select onChange={onChange} name="roleId" className="form-select" aria-label="Default select example" defaultValue='' value={roleId}>
-              <option value=''>Select a role</option>
+            <select
+              onChange={onChange}
+              name="roleId"
+              className="form-select"
+              aria-label="Default select example"
+              defaultValue=""
+              value={roleId}
+            >
+              <option value="">Select a role</option>
               {rolesList.map((role) => {
                 return (
-                  <option key={role._id} value={role._id}>{role.name}</option>
-                )
+                  <option key={role._id} value={role._id}>
+                    {role.name}
+                  </option>
+                );
               })}
             </select>
           </div>
           <div className="form-group">
             <label htmlFor="">Stores</label>
-            <select onChange={onChange} name="storeId" className="form-select" aria-label="Default select example" defaultValue='' value={storeId}>
-              <option value=''>Select a store</option>
-              {
-                storesList.map((store) => {
-                  return (
-                    <option key={store._id} value={store._id}>{store.name}</option>
-
-                  )
-                })
-              }
-              
+            <select
+              onChange={onChange}
+              name="storeId"
+              className="form-select"
+              aria-label="Default select example"
+              defaultValue=""
+              value={storeId}
+            >
+              <option value="">Select a store</option>
+              {storesList.map((store) => {
+                return (
+                  <option key={store._id} value={store._id}>
+                    {store.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div className="form-group d-flex justify-content-between">
+            <Button href="/admin/users" variant="light">
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </section>

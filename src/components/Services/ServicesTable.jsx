@@ -45,7 +45,7 @@ const ServicesTable = () => {
 
   return (
     <Fragment>
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Name</th>
@@ -84,8 +84,7 @@ const ServicesTable = () => {
           })}
         </tbody>
       </Table>
-      <div className="d-flex justify-content-between">
-        <Button href="/admin/services" variant="light">Back</Button>
+      <div className="d-flex justify-content-end">
         <Button href="/admin/services/add">Add Service</Button>
       </div>
     </Fragment>

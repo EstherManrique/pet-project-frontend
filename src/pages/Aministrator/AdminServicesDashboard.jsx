@@ -24,7 +24,9 @@ const AdminServicesDashboard = ({ ...props }) => {
   }, [isAdmin, navigate]);
 
   return (
-    <div className="mt-5">
+    <div className="mt-5" style={{
+      minHeight: '40rem'
+    }}>
       <Container>
       <h2>Administrate Services</h2>
         {

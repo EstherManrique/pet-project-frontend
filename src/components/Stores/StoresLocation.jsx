@@ -24,6 +24,21 @@ const StoresLocation = () => {
   };
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCenter({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            setCenter(defaultCenter);
+          }
+        }
+      );
+    }
     loadStores();
   }, []);
 

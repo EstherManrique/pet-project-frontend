@@ -55,7 +55,7 @@ const ManagerReservationsTable = () => {
 
   return (
     <Fragment>
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Client Name</th>

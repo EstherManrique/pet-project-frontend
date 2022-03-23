@@ -23,7 +23,9 @@ const AdminUsersDashboard = ({ ...props }) => {
   }, [isAdmin, navigate]);
 
   return (
-    <Fragment>
+    <div style={{
+      minHeight: '40rem'
+    }}>
       <Container>
       <h2>Administrator Users</h2>
         {
@@ -34,7 +36,7 @@ const AdminUsersDashboard = ({ ...props }) => {
           }[componentAction]
         }
       </Container>
-    </Fragment>
+    </div>
   );
 };
 
