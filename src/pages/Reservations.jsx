@@ -13,12 +13,14 @@ const Reservations = () => {
     }
   }, [user, navigate]);
   return (
-    <Fragment>
+    <div style={{
+      minHeight: '40rem'
+    }}>
       <Container>
         <h2>Reservations</h2>
         <ReservationForm />
       </Container>
-    </Fragment>
+    </div>
   );
 };
 
