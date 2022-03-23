@@ -145,7 +145,7 @@ const UserForm = ({ ...props }) => {
     if(id) {
       getUser(id);
     }
-  }, [id]);
+  });
 
   return (
     <Fragment>

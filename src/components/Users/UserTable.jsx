@@ -27,7 +27,7 @@ function UserTable() {
 
   useEffect(() => {
     loadUsers();
-  }, []);
+  });
 
   const handleDelete = async (id) => {
     if (id) {
