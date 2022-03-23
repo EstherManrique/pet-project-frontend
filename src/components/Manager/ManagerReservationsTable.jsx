@@ -25,7 +25,7 @@ const ManagerReservationsTable = () => {
 
   useEffect(() => {
     loadReservations();
-  }, []);
+  });
 
   const handleConfirm = async (id, status) => {
     if (id) {

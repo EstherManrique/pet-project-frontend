@@ -3,7 +3,6 @@ import { Table, Button } from "react-bootstrap";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 
 const ServicesTable = () => {
   const [services, setServices] = useState([]);

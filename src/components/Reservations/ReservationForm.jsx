@@ -13,7 +13,8 @@ const getTomorrowDate = () => {
 const ReservationForm = () => {
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const { user } = useSelector((state) => state.auth);
 
