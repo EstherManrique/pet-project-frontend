@@ -67,7 +67,7 @@ const ManagerReservationsTable = () => {
             <th>Date</th>
             <th>Status</th>
             <th>Client Phone</th>
-            <th>Store</th>
+            {/* <th>Store</th> */}
             <th>Service</th>
             <th>Operations</th>
           </tr>
@@ -87,7 +87,7 @@ const ManagerReservationsTable = () => {
                   </span>
                 </td>
                 <td>{reservation.clientPhone}</td>
-                <td>{reservation.storeId.name}</td>
+                {/* <td>{reservation.storeId.name}</td> */}
                 <td>{reservation.serviceId.name}</td>
                 <td>
                   {reservation.status !== "confirmed" && (

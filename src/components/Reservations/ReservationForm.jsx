@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const getTomorrowDate = () => {
   const today = new Date();
@@ -21,8 +22,8 @@ const ReservationForm = () => {
     petName: "",
     date: "",
     clientPhone: "",
-    storeId: searchParams.get("storeId") || '',
-    serviceId: searchParams.get("serviceId") || '',
+    storeId: searchParams.get("storeId") || "",
+    serviceId: searchParams.get("serviceId") || "",
   };
 
   const [formData, setFormData] = useState(formDefault);
@@ -186,10 +187,13 @@ const ReservationForm = () => {
               })}
             </select>
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div className="form-group d-flex justify-content-between">
+            <Button href="/" variant="light">
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </section>
