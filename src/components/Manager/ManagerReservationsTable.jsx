@@ -3,6 +3,8 @@ import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { FaCheck, FaBan } from "react-icons/fa";
+import { ISODateString } from "../../utils/utils";
+
 
 const ManagerReservationsTable = () => {
   const [reservations, setReservations] = useState([]);
@@ -25,7 +27,7 @@ const ManagerReservationsTable = () => {
 
   useEffect(() => {
     loadReservations();
-  });
+  }, []);
 
   const handleConfirm = async (id, status) => {
     if (id) {
@@ -53,6 +55,8 @@ const ManagerReservationsTable = () => {
     }
   };
 
+
+
   return (
     <Fragment>
       <Table striped bordered hover responsive>
@@ -74,7 +78,7 @@ const ManagerReservationsTable = () => {
               <tr key={reservation._id}>
                 <td>{reservation.clientId.name}</td>
                 <td>{reservation.petName}</td>
-                <td>{reservation.date}</td>
+                <td>{ISODateString(reservation.date)}</td>
                 <td>
                   <span style={{
                     color: reservation.status === 'confirmed' ? 'green' : (reservation.status === 'canceled' ? 'red' : '')

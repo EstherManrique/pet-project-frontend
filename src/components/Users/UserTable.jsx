@@ -3,6 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { ISODateString } from "../../utils/utils";
 
 
 function UserTable() {
@@ -71,7 +72,7 @@ function UserTable() {
                 <td>{user.name}</td>
                 <td>{user.userName}</td>
                 <td>{user.email}</td>
-                <td>{user.createdAt}</td>
+                <td>{ISODateString(user.createdAt)}</td>
                 <td>{user.roleId.name}</td>
                 <td>
                   {user.hasOwnProperty("storeId") ? user.storeId.name : "-"}

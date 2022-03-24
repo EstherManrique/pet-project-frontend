@@ -12,9 +12,12 @@ const AdminUsersDashboard = ({ ...props }) => {
 
   const navigate = useNavigate();
 
+  let isAdmin = false;
   const { user } = useSelector((state) => state.auth);
-  const { roles } = user;
-  const isAdmin = roles.name === "Administrator";
+  if(user) {
+    const { roles } = user;
+    isAdmin = roles.name === "Administrator";
+  }
 
   useEffect(() => {
     if (!isAdmin) {
