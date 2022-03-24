@@ -14,7 +14,7 @@ const Reservations = () => {
   }, [user, navigate]);
   return (
     <div style={{
-      minHeight: '40rem'
+      minHeight: '50rem'
     }}>
       <Container>
         <h2>Reservations</h2>

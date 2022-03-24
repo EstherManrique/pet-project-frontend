@@ -1,36 +1,26 @@
-import React from "react";
-// import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import ManagerReservationsTable from "../components/Manager/ManagerReservationsTable";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const ManagerDashboard = () => {
-  // const { user } = useSelector((state) => state.auth);
-  /*
-  {
-    "_id": "62369f99ce459cad94e651db",
-    "name": "Admin",
-    "email": "admin@petspa.com.mx",
-    "roles": [
-        {
-            "_id": "6236819646843b765d65e1a6",
-            "name": "Administrator"
-        }
-    ],
-    "store": {
-        "_id": "6236827c46843b765d65e1ce",
-        "name": "PS Narvarte",
-        "address": "Uxmal # 240",
-        "email": "psnarvarte@petspa.com.mx",
-        "phone": 4455668800,
-        "location": "19.392829010422073, -99.15453071614867",
-        "createdAt": "2022-03-20T01:25:16.905Z",
-        "updatedAt": "2022-03-20T01:25:16.905Z"
-    },
 
-}
-  */
+  const navigate = useNavigate();
 
-  // console.log(user);
+  const { user } = useSelector((state) => state.auth);
+  let isManager = false;
+  if(user) {
+    const { roles } = user;
+    isManager = roles.name === "Manager";
+  }
+
+  useEffect(() => {
+    if (!isManager) {
+      navigate("/");
+    }
+  }, [isManager, navigate]);
+
   return (
     <div className="mt-5"  style={{
       minHeight: '40rem'
