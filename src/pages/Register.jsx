@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner/Spinner";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -29,9 +29,6 @@ function Register() {
     if (isError) {
       toast.error(message);
     }
-
-    console.log(isSuccess);
-    console.log(user);
 
     if (isSuccess || user) {
       navigate("/");
@@ -136,10 +133,13 @@ function Register() {
                 onChange={onChange}
               />
             </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
+            <div className="form-group d-flex justify-content-between">
+              <Button href="/" variant="light">
+                Back
+              </Button>
+              <Button type="submit" variant="primary">
                 Register
-              </button>
+              </Button>
             </div>
           </form>
         </section>
