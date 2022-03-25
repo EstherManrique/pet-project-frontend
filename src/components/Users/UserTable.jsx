@@ -57,12 +57,12 @@ function UserTable() {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Username</th>
+            <th>Nombre</th>
+            <th>Numbre Usuario</th>
             <th>Email</th>
-            <th>Created</th>
-            <th>Role</th>
-            <th>Store</th>
+            <th>Creado</th>
+            <th>Rol</th>
+            <th>Tienda</th>
           </tr>
         </thead>
         <tbody>

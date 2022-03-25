@@ -95,35 +95,38 @@ const ServiceForm = ({ ...props }) => {
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
+          <label htmlFor="name">Nombre</label>
             <input
               type="text"
               className="form-control"
               id="name"
               name="name"
               value={name}
-              placeholder="Enter service name"
+              placeholder="Ingrese el nombre"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+          <label htmlFor="description">Descripción</label>
             <input
               type="text"
               className="form-control"
               id="description"
               name="description"
               value={description}
-              placeholder="Enter service description"
+              placeholder="Ingrese la descripción"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+          <label htmlFor="price">Precio</label>
             <input
               type="number"
               className="form-control"
               id="price"
               name="price"
               value={price}
-              placeholder="Enter service price"
+              placeholder="Ingrese el precio"
               onChange={onChange}
             />
           </div>

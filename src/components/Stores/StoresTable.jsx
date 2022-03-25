@@ -49,12 +49,12 @@ const StoresTable = () => {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Address</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
             <th>Email</th>
-            <th>Phone</th>
+            <th>Teléfono</th>
             {/* <th>Location</th> */}
-            <th>Operations</th>
+            <th>Operación</th>
           </tr>
         </thead>
         <tbody>

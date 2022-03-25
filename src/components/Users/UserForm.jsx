@@ -146,30 +146,29 @@ const UserForm = ({ ...props }) => {
 
   return (
     <Fragment>
-      <h1>Section Users</h1>
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Nombre</label>
             <input
               type="text"
               className="form-control"
               id="name"
               name="name"
               value={name}
-              placeholder="Enter user name"
+              placeholder="Ingrese su nombre"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="userName">Nombre de Usuario</label>
             <input
               type="text"
               className="form-control"
               id="userName"
               name="userName"
               value={userName}
-              placeholder="Enter user name"
+              placeholder="Ingrese su nombre de usuario"
               onChange={onChange}
             />
           </div>
@@ -181,7 +180,7 @@ const UserForm = ({ ...props }) => {
               id="email"
               name="email"
               value={email}
-              placeholder="Enter use email"
+              placeholder="Ingrese su email"
               onChange={onChange}
             />
           </div>
@@ -192,21 +191,22 @@ const UserForm = ({ ...props }) => {
               className="form-control"
               id="password"
               name="password"
-              placeholder="Enter user password"
+              placeholder="Ingrese su password"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="">Roles</label>
+            <label htmlFor="roleId">Roles</label>
             <select
               onChange={onChange}
               name="roleId"
+              id="roleId"
               className="form-select"
               aria-label="Default select example"
               defaultValue=""
               value={roleId}
             >
-              <option value="">Select a role</option>
+              <option value="">Selecciona un role</option>
               {rolesList.map((role) => {
                 return (
                   <option key={role._id} value={role._id}>
@@ -217,16 +217,17 @@ const UserForm = ({ ...props }) => {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="">Stores</label>
+            <label htmlFor="storeId">Tiendas</label>
             <select
               onChange={onChange}
               name="storeId"
+              id="storeId"
               className="form-select"
               aria-label="Default select example"
               defaultValue=""
               value={storeId}
             >
-              <option value="">Select a store</option>
+              <option value="">Selecciona una tienda</option>
               {storesList.map((store) => {
                 return (
                   <option key={store._id} value={store._id}>

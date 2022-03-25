@@ -69,40 +69,43 @@ function Login() {
           <h2>
             <FaSignInAlt /> Login
           </h2>
-          <p>Login and start setting a reservation</p>
+          <p>Ingresa y haz una reservación</p>
         </section>
         <section className="form">
           <form onSubmit={onSubmit}>
             <div className="form-group">
+            <label htmlFor="userName">Nombre de usuario</label>
               <input
                 type="text"
                 className="form-control"
                 id="userName"
                 name="userName"
                 value={userName}
-                placeholder="Enter your username"
+                placeholder="Ingrese su nombre de usuario"
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
+            <label htmlFor="email">Email</label>
               <input
                 type="email"
                 className="form-control"
                 id="email"
                 name="email"
                 value={email}
-                placeholder="Enter your email"
+                placeholder="Ingrese su email"
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
+            <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control"
                 id="password"
                 name="password"
                 value={password}
-                placeholder="Enter password"
+                placeholder="Ingrese su password"
                 onChange={onChange}
               />
             </div>

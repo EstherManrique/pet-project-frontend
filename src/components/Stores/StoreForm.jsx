@@ -97,61 +97,65 @@ const StoreForm = ({ ...props }) => {
 
   return (
     <Fragment>
-      <h1>Section Stores</h1>
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
+            <label htmlFor="name">Nombre</label>
             <input
               type="text"
               className="form-control"
               id="name"
               name="name"
               value={name}
-              placeholder="Enter store name"
+              placeholder="Ingrese el nombre de la tienda"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="address">Dirección</label>
             <input
               type="text"
               className="form-control"
               id="address"
               name="address"
               value={address}
-              placeholder="Enter store address"
+              placeholder="Ingrese la dirección de la tienda"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               className="form-control"
               id="email"
               name="email"
               value={email}
-              placeholder="Enter store email"
+              placeholder="Ingrese el email"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+          <label htmlFor="phone">Teléfono</label>
             <input
               type="tel"
               className="form-control"
               id="phone"
               name="phone"
               value={phone}
-              placeholder="Enter store phone"
+              placeholder="Ingrese el número de teléfono"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+          <label htmlFor="location">Ubicación</label>
             <input
               type="text"
               className="form-control"
               id="location"
               name="location"
               value={location}
-              placeholder="Enter store location"
+              placeholder="Ingrese la ubicación"
               onChange={onChange}
             />
           </div>

@@ -48,10 +48,10 @@ const ServicesTable = () => {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Operations</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Operación</th>
           </tr>
         </thead>
         <tbody>

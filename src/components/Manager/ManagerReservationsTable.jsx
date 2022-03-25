@@ -62,14 +62,14 @@ const ManagerReservationsTable = () => {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>Client Name</th>
-            <th>Pet Name</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Client Phone</th>
+            <th>Ciente</th>
+            <th>Mascota</th>
+            <th>Fecha</th>
+            <th>Estatus</th>
+            <th>Teléfono</th>
             {/* <th>Store</th> */}
-            <th>Service</th>
-            <th>Operations</th>
+            <th>Servicio</th>
+            <th>Operación</th>
           </tr>
         </thead>
         <tbody>
