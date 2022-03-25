@@ -31,7 +31,7 @@ const AdminServicesDashboard = ({ ...props }) => {
       minHeight: '40rem'
     }}>
       <Container>
-      <h2>Administrate Services</h2>
+      <h2>Manage services</h2>
         {
           {
             add: <ServiceForm />,

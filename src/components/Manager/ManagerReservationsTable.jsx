@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { FaCheck, FaBan } from "react-icons/fa";
 import { ISODateString } from "../../utils/utils";
 
-
 const ManagerReservationsTable = () => {
   const [reservations, setReservations] = useState([]);
 
@@ -44,8 +43,9 @@ const ManagerReservationsTable = () => {
       }).then((response) => {
         if (response.status === 200) {
           toast.success("Reservation " + status + ".");
-
           loadReservations();
+        } else if(response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
@@ -54,9 +54,7 @@ const ManagerReservationsTable = () => {
       toast.error("Not valid ID");
     }
   };
-
-
-
+  
   return (
     <Fragment>
       <Table striped bordered hover responsive>

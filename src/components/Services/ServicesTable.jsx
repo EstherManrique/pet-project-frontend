@@ -34,6 +34,8 @@ const ServicesTable = () => {
         if (response.status === 200) {
           toast.success("🦄 Service deleted.");
           loadServices();
+        } else if (response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }

@@ -35,6 +35,8 @@ const StoresTable = () => {
         if (response.status === 200) {
           toast.success("🦄 Store deleted.");
           loadStores();
+        } else if(response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
