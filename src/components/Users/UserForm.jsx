@@ -2,10 +2,11 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
-
+import { Alert, Button } from "react-bootstrap";
 
 const UserForm = ({ ...props }) => {
+  const [formErrors, setFormErrors] = useState([]);
+
   const navigate = useNavigate();
 
   const { id } = props;
@@ -41,16 +42,24 @@ const UserForm = ({ ...props }) => {
         Authorization: "Bearer " + user.token,
       },
       body: JSON.stringify(data),
-    }).then((response) => {
-      if (response.status === 200) {
-        toast.success("🦄 User saved.", {
-          autoClose: 1000,
-          onClose: () => navigate("/admin/users"),
-        });
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    });
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("🦄 User saved.", {
+            autoClose: 1000,
+            onClose: () => navigate("/admin/users"),
+          });
+        } else if (response.status === 400) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        if (typeof json !== 'undefined' && json.hasOwnProperty("error")) {
+          setFormErrors(json.error);
+        }
+      });
   };
 
   const getUser = async (id) => {
@@ -123,9 +132,11 @@ const UserForm = ({ ...props }) => {
       userName,
       email,
       password,
-      roleId,
-      storeId,
+      roleId
     };
+    if(storeId !== "") {
+      userData.storeId = storeId;
+    }
     saveUser(userData);
   };
 
@@ -146,30 +157,36 @@ const UserForm = ({ ...props }) => {
 
   return (
     <Fragment>
-      <h1>Section Users</h1>
+      {formErrors.length > 0 && (
+        <Alert variant="danger" dismissible onClose={() => setFormErrors([])}>
+          {formErrors.map((error, index) => {
+            return <p key={index}>{error.msg}</p>;
+          })}
+        </Alert>
+      )}
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Nombre</label>
             <input
               type="text"
               className="form-control"
               id="name"
               name="name"
               value={name}
-              placeholder="Enter user name"
+              placeholder="Ingrese su nombre"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="userName">Nombre de Usuario</label>
             <input
               type="text"
               className="form-control"
               id="userName"
               name="userName"
               value={userName}
-              placeholder="Enter user name"
+              placeholder="Ingrese su nombre de usuario"
               onChange={onChange}
             />
           </div>
@@ -181,7 +198,7 @@ const UserForm = ({ ...props }) => {
               id="email"
               name="email"
               value={email}
-              placeholder="Enter use email"
+              placeholder="Ingrese su email"
               onChange={onChange}
             />
           </div>
@@ -192,21 +209,21 @@ const UserForm = ({ ...props }) => {
               className="form-control"
               id="password"
               name="password"
-              placeholder="Enter user password"
+              placeholder="Ingrese su password"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="">Roles</label>
+            <label htmlFor="roleId">Roles</label>
             <select
               onChange={onChange}
               name="roleId"
+              id="roleId"
               className="form-select"
               aria-label="Default select example"
-              defaultValue=""
               value={roleId}
             >
-              <option value="">Select a role</option>
+              <option value="">Selecciona un role</option>
               {rolesList.map((role) => {
                 return (
                   <option key={role._id} value={role._id}>
@@ -217,16 +234,16 @@ const UserForm = ({ ...props }) => {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="">Stores</label>
+            <label htmlFor="storeId">Tiendas</label>
             <select
               onChange={onChange}
               name="storeId"
+              id="storeId"
               className="form-select"
               aria-label="Default select example"
-              defaultValue=""
               value={storeId}
             >
-              <option value="">Select a store</option>
+              <option value="">Selecciona una tienda</option>
               {storesList.map((store) => {
                 return (
                   <option key={store._id} value={store._id}>

@@ -28,7 +28,7 @@ function UserTable() {
 
   useEffect(() => {
     loadUsers();
-  });
+  }, []);
 
   const handleDelete = async (id) => {
     if (id) {
@@ -43,6 +43,8 @@ function UserTable() {
         if (response.status === 200) {
           toast.success("🦄 User deleted.");
           loadUsers();
+        } else if (response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
@@ -57,12 +59,12 @@ function UserTable() {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Username</th>
+            <th>Nombre</th>
+            <th>Numbre Usuario</th>
             <th>Email</th>
-            <th>Created</th>
-            <th>Role</th>
-            <th>Store</th>
+            <th>Creado</th>
+            <th>Rol</th>
+            <th>Tienda</th>
           </tr>
         </thead>
         <tbody>

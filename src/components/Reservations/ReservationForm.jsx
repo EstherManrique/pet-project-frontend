@@ -76,6 +76,8 @@ const ReservationForm = () => {
           autoClose: 1000,
           onClose: () => navigate("/"),
         });
+      } else if(response.status === 400) {
+        toast.error("Form fields error, please check");
       } else {
         toast.error("HTTP status " + response.status);
       }

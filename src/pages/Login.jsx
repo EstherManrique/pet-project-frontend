@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner/Spinner";
-import { Button, Container } from "react-bootstrap";
+import { Alert, Button, Container } from "react-bootstrap";
 
 function Login() {
+  const [formErrors, setFormErrors] = useState([]);
+
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -25,7 +26,13 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      if(message.hasOwnProperty('error')){
+        setFormErrors(message.error);
+      } else {
+        setFormErrors([{
+          msg: message.message
+        }]);
+      }
     }
 
     if (isSuccess || user) {
@@ -69,40 +76,50 @@ function Login() {
           <h2>
             <FaSignInAlt /> Login
           </h2>
-          <p>Login and start setting a reservation</p>
+          <p>Ingresa y haz una reservación</p>
         </section>
+        {formErrors.length > 0 && (
+          <Alert variant="danger" dismissible onClose={() => setFormErrors([])}>
+            {formErrors.map((error, index) => {
+              return <p key={index}>{error.msg}</p>;
+            })}
+          </Alert>
+        )}
         <section className="form">
           <form onSubmit={onSubmit}>
             <div className="form-group">
+              <label htmlFor="userName">Nombre de usuario</label>
               <input
                 type="text"
                 className="form-control"
                 id="userName"
                 name="userName"
                 value={userName}
-                placeholder="Enter your username"
+                placeholder="Ingrese su nombre de usuario"
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 className="form-control"
                 id="email"
                 name="email"
                 value={email}
-                placeholder="Enter your email"
+                placeholder="Ingrese su email"
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control"
                 id="password"
                 name="password"
                 value={password}
-                placeholder="Enter password"
+                placeholder="Ingrese su password"
                 onChange={onChange}
               />
             </div>
