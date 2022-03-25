@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Alert, Button } from "react-bootstrap";
-import { FaTimes } from "react-icons/fa";
 
 const StoreForm = ({ ...props }) => {
   const [formErrors, setFormErrors] = useState([]);
@@ -118,26 +117,26 @@ const StoreForm = ({ ...props }) => {
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Nombre</label>
+            <label htmlFor="name">Name</label>
             <input
               type="text"
               className="form-control"
               id="name"
               name="name"
               value={name}
-              placeholder="Ingrese el nombre de la tienda"
+              placeholder="Enter Store Name"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="address">Dirección</label>
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               className="form-control"
               id="address"
               name="address"
               value={address}
-              placeholder="Ingrese la dirección de la tienda"
+              placeholder="Enter address"
               onChange={onChange}
             />
           </div>
@@ -149,31 +148,31 @@ const StoreForm = ({ ...props }) => {
               id="email"
               name="email"
               value={email}
-              placeholder="Ingrese el email"
+              placeholder="Enter email"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="phone">Teléfono</label>
+            <label htmlFor="phone">Phone</label>
             <input
               type="tel"
               className="form-control"
               id="phone"
               name="phone"
               value={phone}
-              placeholder="Ingrese el número de teléfono"
+              placeholder="Enter phone"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="location">Ubicación</label>
+            <label htmlFor="location">Location</label>
             <input
               type="text"
               className="form-control"
               id="location"
               name="location"
               value={location}
-              placeholder="Ingrese la ubicación"
+              placeholder="Enter location"
               onChange={onChange}
             />
           </div>

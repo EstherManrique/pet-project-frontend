@@ -26,11 +26,11 @@ const AdminUsersDashboard = ({ ...props }) => {
   }, [isAdmin, navigate]);
 
   return (
-    <div style={{
+    <div className="mt-2" style={{
       minHeight: '40rem'
     }}>
       <Container>
-      <h2>Administrator Users</h2>
+      <h2>Manage Users</h2>
         {
           {
             add: <UserForm />,

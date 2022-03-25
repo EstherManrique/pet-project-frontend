@@ -22,7 +22,7 @@ const ManagerDashboard = () => {
   }, [isManager, navigate]);
 
   return (
-    <div className="mt-5"  style={{
+    <div className="mt-2"  style={{
       minHeight: '40rem'
     }}>
       <Container>

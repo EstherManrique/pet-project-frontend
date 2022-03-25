@@ -76,7 +76,7 @@ function Login() {
           <h2>
             <FaSignInAlt /> Login
           </h2>
-          <p>Ingresa y haz una reservación</p>
+          <p>Enter and make a reservation</p>
         </section>
         {formErrors.length > 0 && (
           <Alert variant="danger" dismissible onClose={() => setFormErrors([])}>
@@ -88,14 +88,14 @@ function Login() {
         <section className="form">
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="userName">Nombre de usuario</label>
+              <label htmlFor="userName">Username</label>
               <input
                 type="text"
                 className="form-control"
                 id="userName"
                 name="userName"
                 value={userName}
-                placeholder="Ingrese su nombre de usuario"
+                placeholder="Enter username"
                 onChange={onChange}
               />
             </div>
@@ -107,7 +107,7 @@ function Login() {
                 id="email"
                 name="email"
                 value={email}
-                placeholder="Ingrese su email"
+                placeholder="Enter your email"
                 onChange={onChange}
               />
             </div>
@@ -119,7 +119,7 @@ function Login() {
                 id="password"
                 name="password"
                 value={password}
-                placeholder="Ingrese su password"
+                placeholder="Enter your password"
                 onChange={onChange}
               />
             </div>

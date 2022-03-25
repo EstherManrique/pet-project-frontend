@@ -82,9 +82,9 @@ function Register() {
       <Container>
         <section className="heading">
           <h2>
-            <FaUser /> Registrate
+            <FaUser /> Register
           </h2>
-          <p>Por avor crea una cuenta</p>
+          <p>Please create an account</p>
         </section>
         {formErrors.length > 0 && (
           <Alert variant="danger" dismissible onClose={() => setFormErrors([])}>
@@ -96,26 +96,26 @@ function Register() {
         <section className="form">
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Nombre</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 className="form-control"
                 id="name"
                 name="name"
                 value={name}
-                placeholder="Ingresa tu nombre"
+                placeholder="Enter your name"
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="userName">Nombre de usuario</label>
+              <label htmlFor="userName">Username</label>
               <input
                 type="text"
                 className="form-control"
                 id="userName"
                 name="userName"
                 value={userName}
-                placeholder="Ingresa tu nombre de usuario"
+                placeholder="Enter your username"
                 onChange={onChange}
               />
             </div>
@@ -127,7 +127,7 @@ function Register() {
                 id="email"
                 name="email"
                 value={email}
-                placeholder="Ingresa tu email"
+                placeholder="Enter your email"
                 onChange={onChange}
               />
             </div>
@@ -139,19 +139,19 @@ function Register() {
                 id="password"
                 name="password"
                 value={password}
-                placeholder="Ingresa tu password"
+                placeholder="Enter your password"
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password2">Confirma tu password</label>
+              <label htmlFor="password2">Confirm your password</label>
               <input
                 type="password"
                 className="form-control"
                 id="password2"
                 name="password2"
                 value={password2}
-                placeholder="Confirma tu password"
+                placeholder="Confirm your password"
                 onChange={onChange}
               />
             </div>
