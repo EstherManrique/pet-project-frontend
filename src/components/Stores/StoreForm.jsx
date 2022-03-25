@@ -41,6 +41,8 @@ const StoreForm = ({ ...props }) => {
           autoClose: 1000,
           onClose: () => navigate("/admin/stores"),
         });
+      } else if(response.status === 400) {
+        toast.error("Form fields error, please check");
       } else {
         toast.error("HTTP status " + response.status);
       }
