@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ServiceForm from "../../components/Services/ServiceForm";
-import ServicesTable from "../../components/Services/ServicesTable";
+import StoreForm from "../../components/Stores/StoreForm";
+import StoresTable from "../../components/Stores/StoresTable";
 import { Container } from "react-bootstrap";
 
-const AdminServicesDashboard = ({ ...props }) => {
+const AdminStoresDashboard = ({ ...props }) => {
 
   const { id } = useParams();
 
@@ -13,9 +13,12 @@ const AdminServicesDashboard = ({ ...props }) => {
 
   const navigate = useNavigate();
 
+  let isAdmin = false;
   const { user } = useSelector((state) => state.auth);
-  const { roles } = user;
-  const isAdmin = roles.name === "Administrator";
+  if(user) {
+    const { roles } = user;
+    isAdmin = roles.name === "Administrator";
+  }
 
   useEffect(() => {
     if (!isAdmin) {
@@ -24,14 +27,16 @@ const AdminServicesDashboard = ({ ...props }) => {
   }, [isAdmin, navigate]);
 
   return (
-    <div className="mt-5">
+    <div className="mt-2" style={{
+      minHeight: '40rem'
+    }}>
       <Container>
-      <h2>Administrate Services</h2>
+      <h2>Manage Stores</h2>
         {
           {
-            add: <ServiceForm />,
-            list: <ServicesTable />,
-            edit: <ServiceForm id={id} />,
+            add: <StoreForm />,
+            list: <StoresTable />,
+            edit: <StoreForm id={id} />,
           }[componentAction]
         }
       </Container>
@@ -39,4 +44,4 @@ const AdminServicesDashboard = ({ ...props }) => {
   );
 };
 
-export default AdminServicesDashboard;
+export default AdminStoresDashboard;

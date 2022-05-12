@@ -3,7 +3,6 @@ import { Table, Button } from "react-bootstrap";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 
 const ServicesTable = () => {
   const [services, setServices] = useState([]);
@@ -35,6 +34,8 @@ const ServicesTable = () => {
         if (response.status === 200) {
           toast.success("🦄 Service deleted.");
           loadServices();
+        } else if (response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
@@ -46,13 +47,13 @@ const ServicesTable = () => {
 
   return (
     <Fragment>
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Operations</th>
+            <th>Operation</th>
           </tr>
         </thead>
         <tbody>
@@ -85,8 +86,7 @@ const ServicesTable = () => {
           })}
         </tbody>
       </Table>
-      <div className="d-flex justify-content-between">
-        <Button href="/admin/services" variant="light">Back</Button>
+      <div className="d-flex justify-content-end">
         <Button href="/admin/services/add">Add Service</Button>
       </div>
     </Fragment>

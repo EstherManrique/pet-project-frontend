@@ -3,6 +3,7 @@ import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { FaCheck, FaBan } from "react-icons/fa";
+import { ISODateString } from "../../utils/utils";
 
 const ManagerReservationsTable = () => {
   const [reservations, setReservations] = useState([]);
@@ -42,8 +43,9 @@ const ManagerReservationsTable = () => {
       }).then((response) => {
         if (response.status === 200) {
           toast.success("Reservation " + status + ".");
-
           loadReservations();
+        } else if(response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
@@ -52,20 +54,20 @@ const ManagerReservationsTable = () => {
       toast.error("Not valid ID");
     }
   };
-
+  
   return (
     <Fragment>
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>Client Name</th>
-            <th>Pet Name</th>
+            <th>Client</th>
+            <th>Pet</th>
             <th>Date</th>
             <th>Status</th>
-            <th>Client Phone</th>
-            <th>Store</th>
+            <th>Phone</th>
+            {/* <th>Store</th> */}
             <th>Service</th>
-            <th>Operations</th>
+            <th>Operatión</th>
           </tr>
         </thead>
         <tbody>
@@ -74,7 +76,7 @@ const ManagerReservationsTable = () => {
               <tr key={reservation._id}>
                 <td>{reservation.clientId.name}</td>
                 <td>{reservation.petName}</td>
-                <td>{reservation.date}</td>
+                <td>{ISODateString(reservation.date)}</td>
                 <td>
                   <span style={{
                     color: reservation.status === 'confirmed' ? 'green' : (reservation.status === 'canceled' ? 'red' : '')
@@ -83,7 +85,7 @@ const ManagerReservationsTable = () => {
                   </span>
                 </td>
                 <td>{reservation.clientPhone}</td>
-                <td>{reservation.storeId.name}</td>
+                {/* <td>{reservation.storeId.name}</td> */}
                 <td>{reservation.serviceId.name}</td>
                 <td>
                   {reservation.status !== "confirmed" && (

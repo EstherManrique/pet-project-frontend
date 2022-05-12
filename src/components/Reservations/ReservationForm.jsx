@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const getTomorrowDate = () => {
   const today = new Date();
@@ -13,7 +14,7 @@ const getTomorrowDate = () => {
 const ReservationForm = () => {
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const { user } = useSelector((state) => state.auth);
 
@@ -21,8 +22,8 @@ const ReservationForm = () => {
     petName: "",
     date: "",
     clientPhone: "",
-    storeId: searchParams.get("storeId") || '',
-    serviceId: searchParams.get("serviceId") || '',
+    storeId: searchParams.get("storeId") || "",
+    serviceId: searchParams.get("serviceId") || "",
   };
 
   const [formData, setFormData] = useState(formDefault);
@@ -75,6 +76,8 @@ const ReservationForm = () => {
           autoClose: 1000,
           onClose: () => navigate("/"),
         });
+      } else if(response.status === 400) {
+        toast.error("Form fields error, please check");
       } else {
         toast.error("HTTP status " + response.status);
       }
@@ -186,10 +189,13 @@ const ReservationForm = () => {
               })}
             </select>
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div className="form-group d-flex justify-content-between">
+            <Button href="/" variant="light">
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </section>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import UserForm from "../../components/Users/UserForm";
@@ -12,9 +12,12 @@ const AdminUsersDashboard = ({ ...props }) => {
 
   const navigate = useNavigate();
 
+  let isAdmin = false;
   const { user } = useSelector((state) => state.auth);
-  const { roles } = user;
-  const isAdmin = roles.name === "Administrator";
+  if(user) {
+    const { roles } = user;
+    isAdmin = roles.name === "Administrator";
+  }
 
   useEffect(() => {
     if (!isAdmin) {
@@ -23,9 +26,11 @@ const AdminUsersDashboard = ({ ...props }) => {
   }, [isAdmin, navigate]);
 
   return (
-    <Fragment>
+    <div className="mt-2" style={{
+      minHeight: '40rem'
+    }}>
       <Container>
-      <h2>Administrator Users</h2>
+      <h2>Manage Users</h2>
         {
           {
             add: <UserForm />,
@@ -34,7 +39,7 @@ const AdminUsersDashboard = ({ ...props }) => {
           }[componentAction]
         }
       </Container>
-    </Fragment>
+    </div>
   );
 };
 

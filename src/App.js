@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/Header/Header.jsx";
 import Stores from "./pages/Stores";
-import AdminServicesDashboard from "./pages/Aministrator/AdminServicesDashboard";
+import AdminServicesDashboard from "./pages/Administrator/AdminServicesDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import 'react-toastify/dist/ReactToastify.css'
 import "bootstrap/dist/css/bootstrap.min.css";
-import AdminUsersDashboard from "./pages/Aministrator/AdminUsersDashboard.jsx";
-import AdminStoreDashboard from "./pages/Aministrator/AdminStoreDashboard.jsx";
+import AdminUsersDashboard from "./pages/Administrator/AdminUsersDashboard.jsx";
+import AdminStoreDashboard from "./pages/Administrator/AdminStoreDashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 

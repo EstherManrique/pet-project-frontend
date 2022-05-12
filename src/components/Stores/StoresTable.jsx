@@ -35,6 +35,8 @@ const StoresTable = () => {
         if (response.status === 200) {
           toast.success("🦄 Store deleted.");
           loadStores();
+        } else if(response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
@@ -46,15 +48,15 @@ const StoresTable = () => {
 
   return (
     <Fragment>
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Name</th>
             <th>Address</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Location</th>
-            <th>Operations</th>
+            {/* <th>Location</th> */}
+            <th>Operation</th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +67,7 @@ const StoresTable = () => {
                 <td>{store.address}</td>
                 <td>{store.email}</td>
                 <td>{store.phone}</td>
-                <td>{store.location}</td>
+                {/* <td>{store.location}</td> */}
                 <td>
                   <Button
                     variant="success"

@@ -4,7 +4,6 @@ import { Carousel as BCarousel } from "react-bootstrap";
 const Carousel = () => {
   return (
 <BCarousel className='mb-5' style={{
-  height: '70vh',
   overflow: 'hidden'
 }}>
   <BCarousel.Item style={{
@@ -12,7 +11,7 @@ const Carousel = () => {
   }}>
     <img
       className="d-block w-100"
-      src="/assets/images/dog_1.jpg"
+      src="/assets/images/pet_1.jpg"
       alt="First slide"
       style={{
         height: '100%',
@@ -27,7 +26,7 @@ const Carousel = () => {
   }}>
     <img
       className="d-block w-100"
-      src="/assets/images/dog_2.jpg"
+      src="/assets/images/dog_4.jpg"
       alt="Second slide"
       style={{
         height: '100%',

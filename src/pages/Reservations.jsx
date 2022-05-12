@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ReservationForm from "../components/Reservations/ReservationForm";
@@ -13,12 +13,14 @@ const Reservations = () => {
     }
   }, [user, navigate]);
   return (
-    <Fragment>
+    <div style={{
+      minHeight: '50rem'
+    }}>
       <Container>
         <h2>Reservations</h2>
         <ReservationForm />
       </Container>
-    </Fragment>
+    </div>
   );
 };
 

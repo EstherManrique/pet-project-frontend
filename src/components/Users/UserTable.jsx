@@ -3,6 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { ISODateString } from "../../utils/utils";
 
 
 function UserTable() {
@@ -42,6 +43,8 @@ function UserTable() {
         if (response.status === 200) {
           toast.success("🦄 User deleted.");
           loadUsers();
+        } else if (response.status === 400) {
+          toast.error("Form fields error, please check");
         } else {
           toast.error("HTTP status " + response.status);
         }
@@ -53,7 +56,7 @@ function UserTable() {
 
   return (
     <Fragment>
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Name</th>
@@ -62,6 +65,7 @@ function UserTable() {
             <th>Created</th>
             <th>Role</th>
             <th>Store</th>
+            <th>Operations</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +75,7 @@ function UserTable() {
                 <td>{user.name}</td>
                 <td>{user.userName}</td>
                 <td>{user.email}</td>
-                <td>{user.createdAt}</td>
+                <td>{ISODateString(user.createdAt)}</td>
                 <td>{user.roleId.name}</td>
                 <td>
                   {user.hasOwnProperty("storeId") ? user.storeId.name : "-"}

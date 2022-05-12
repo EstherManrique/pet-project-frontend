@@ -2,18 +2,16 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import {createUser, getUsers, deleteUser } from "../../features/users/userSlice";
+import { Alert, Button } from "react-bootstrap";
 
 const UserForm = ({ ...props }) => {
+  const [formErrors, setFormErrors] = useState([]);
+
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const { id } = props;
 
   const { user } = useSelector((state) => state.auth);
-
-  // const state = useSelector((state) => state.users);
-  // const users = [];
 
   const formDefault = {
     name: "",
@@ -28,9 +26,9 @@ const UserForm = ({ ...props }) => {
 
   const [rolesList, setRolesList] = useState([]);
 
-  const [storesList, setStoresList] = useState([])
+  const [storesList, setStoresList] = useState([]);
 
-  const { name, userName, email, password, roleId, storeId} = formData;
+  const { name, userName, email, password, roleId, storeId } = formData;
 
   const saveUser = async (data) => {
     const url = id
@@ -44,16 +42,24 @@ const UserForm = ({ ...props }) => {
         Authorization: "Bearer " + user.token,
       },
       body: JSON.stringify(data),
-    }).then((response) => {
-      if (response.status === 200) {
-        toast.success("🦄 User saved.", {
-          autoClose: 1000,
-          onClose: () => navigate("/admin/users"),
-        });
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    });
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("🦄 User saved.", {
+            autoClose: 1000,
+            onClose: () => navigate("/admin/users"),
+          });
+        } else if (response.status === 400) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        if (typeof json !== 'undefined' && json.hasOwnProperty("error")) {
+          setFormErrors(json.error);
+        }
+      });
   };
 
   const getUser = async (id) => {
@@ -79,13 +85,13 @@ const UserForm = ({ ...props }) => {
           userName,
           email,
           roleId: roleId._id,
-          storeId: storeId ? storeId._id : ''
+          storeId: storeId ? storeId._id : "",
         });
       });
   };
 
   const getRoles = async () => {
-    await fetch('http://localhost:5000/api/roles', {
+    await fetch("http://localhost:5000/api/roles", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -93,31 +99,31 @@ const UserForm = ({ ...props }) => {
         Authorization: "Bearer " + user.token,
       },
     })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    })
-    .then((json) => {
-      setRolesList(json.roles);
-    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        setRolesList(json.roles);
+      });
   };
 
   const getStores = async () => {
-    await fetch('http://localhost:5000/api/stores')
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    })
-    .then((json) => {
-      setStoresList(json.stores);
-    })
-  }
+    await fetch("http://localhost:5000/api/stores")
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        setStoresList(json.stores);
+      });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -126,9 +132,11 @@ const UserForm = ({ ...props }) => {
       userName,
       email,
       password,
-      roleId,
-      storeId
+      roleId
     };
+    if(storeId !== "") {
+      userData.storeId = storeId;
+    }
     saveUser(userData);
   };
 
@@ -142,14 +150,20 @@ const UserForm = ({ ...props }) => {
   useEffect(() => {
     getRoles();
     getStores();
-    if(id) {
+    if (id) {
       getUser(id);
     }
-  }, [id]);
+  }, []);
 
   return (
     <Fragment>
-      <h1>Section Users</h1>
+      {formErrors.length > 0 && (
+        <Alert variant="danger" dismissible onClose={() => setFormErrors([])}>
+          {formErrors.map((error, index) => {
+            return <p key={index}>{error.msg}</p>;
+          })}
+        </Alert>
+      )}
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
@@ -160,7 +174,7 @@ const UserForm = ({ ...props }) => {
               id="name"
               name="name"
               value={name}
-              placeholder="Enter user name"
+              placeholder="Enter name"
               onChange={onChange}
             />
           </div>
@@ -172,7 +186,7 @@ const UserForm = ({ ...props }) => {
               id="userName"
               name="userName"
               value={userName}
-              placeholder="Enter user name"
+              placeholder="Enter username"
               onChange={onChange}
             />
           </div>
@@ -184,7 +198,7 @@ const UserForm = ({ ...props }) => {
               id="email"
               name="email"
               value={email}
-              placeholder="Enter use email"
+              placeholder="Enter email"
               onChange={onChange}
             />
           </div>
@@ -195,40 +209,57 @@ const UserForm = ({ ...props }) => {
               className="form-control"
               id="password"
               name="password"
-              placeholder="Enter user password"
+              placeholder="Enter password"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="">Roles</label>
-            <select onChange={onChange} name="roleId" className="form-select" aria-label="Default select example" defaultValue='' value={roleId}>
-              <option value=''>Select a role</option>
+            <label htmlFor="roleId">Role</label>
+            <select
+              onChange={onChange}
+              name="roleId"
+              id="roleId"
+              className="form-select"
+              aria-label="Default select example"
+              value={roleId}
+            >
+              <option value="">Select role</option>
               {rolesList.map((role) => {
                 return (
-                  <option key={role._id} value={role._id}>{role.name}</option>
-                )
+                  <option key={role._id} value={role._id}>
+                    {role.name}
+                  </option>
+                );
               })}
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="">Stores</label>
-            <select onChange={onChange} name="storeId" className="form-select" aria-label="Default select example" defaultValue='' value={storeId}>
-              <option value=''>Select a store</option>
-              {
-                storesList.map((store) => {
-                  return (
-                    <option key={store._id} value={store._id}>{store.name}</option>
-
-                  )
-                })
-              }
-              
+            <label htmlFor="storeId">Store</label>
+            <select
+              onChange={onChange}
+              name="storeId"
+              id="storeId"
+              className="form-select"
+              aria-label="Default select example"
+              value={storeId}
+            >
+              <option value="">Select store</option>
+              {storesList.map((store) => {
+                return (
+                  <option key={store._id} value={store._id}>
+                    {store.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div className="form-group d-flex justify-content-between">
+            <Button href="/admin/users" variant="light">
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </section>

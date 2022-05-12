@@ -2,8 +2,11 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Alert, Button } from "react-bootstrap";
 
 const StoreForm = ({ ...props }) => {
+  const [formErrors, setFormErrors] = useState([]);
+
   const navigate = useNavigate();
 
   const { id } = props;
@@ -34,16 +37,24 @@ const StoreForm = ({ ...props }) => {
         Authorization: "Bearer " + user.token,
       },
       body: JSON.stringify(data),
-    }).then((response) => {
-      if (response.status === 200) {
-        toast.success("🦄 Store saved.", {
-          autoClose: 1000,
-          onClose: () => navigate("/admin/stores"),
-        });
-      } else {
-        toast.error("HTTP status " + response.status);
-      }
-    });
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("🦄 Store saved.", {
+            autoClose: 1000,
+            onClose: () => navigate("/admin/stores"),
+          });
+        } else if (response.status === 400) {
+          return response.json();
+        } else {
+          toast.error("HTTP status " + response.status);
+        }
+      })
+      .then((json) => {
+        if (typeof json !== 'undefined' && json.hasOwnProperty("error")) {
+          setFormErrors(json.error);
+        }
+      });
   };
 
   const getStore = async (id) => {
@@ -96,68 +107,82 @@ const StoreForm = ({ ...props }) => {
 
   return (
     <Fragment>
-      <h1>Section Stores</h1>
+      {formErrors.length > 0 && (
+        <Alert variant="danger" dismissible onClose={() => setFormErrors([])}>
+          {formErrors.map((error, index) => {
+            return <p key={index}>{error.msg}</p>;
+          })}
+        </Alert>
+      )}
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
+            <label htmlFor="name">Name</label>
             <input
               type="text"
               className="form-control"
               id="name"
               name="name"
               value={name}
-              placeholder="Enter store name"
+              placeholder="Enter Store Name"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               className="form-control"
               id="address"
               name="address"
               value={address}
-              placeholder="Enter store address"
+              placeholder="Enter address"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               className="form-control"
               id="email"
               name="email"
               value={email}
-              placeholder="Enter store email"
+              placeholder="Enter email"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="phone">Phone</label>
             <input
               type="tel"
               className="form-control"
               id="phone"
               name="phone"
               value={phone}
-              placeholder="Enter store phone"
+              placeholder="Enter phone"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="location">Location</label>
             <input
               type="text"
               className="form-control"
               id="location"
               name="location"
               value={location}
-              placeholder="Enter store location"
+              placeholder="Enter location"
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+          <div className="form-group d-flex justify-content-between">
+            <Button href="/admin/stores" variant="light">
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </section>
